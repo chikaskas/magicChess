@@ -35,6 +35,13 @@ void setup() {
   led_strip.show();
   led_strip.begin();
 
+  //setup pins
+  loop_through_squares(
+    [](uint8_t row, uint8_t column) {
+      pinMode(reed_switch_pins[row][column], INPUT_PULLUP);
+    }
+  );
+
   Serial.println("Setup has ended.");
 }
 
