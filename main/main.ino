@@ -44,6 +44,8 @@ void setup() {
   Serial.println("Setup has ended.");
 }
 
+volatile uint32_t excecutions = 0
+
 void loop() {
   // put your main code here, to run repeatedly:
 }
