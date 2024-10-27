@@ -27,14 +27,25 @@ volatile int8_t chess_board[8][8] = {//Initialize chess board
 };
 
 void setup() {
-  // put your setup code here, to run once:
+
   Serial.begin(9600);
   Serial.println("Setup has begun.");
-  led_strip.begin();
+
+  //setup led strip
   led_strip.show();
+  led_strip.begin();
+
   Serial.println("Setup has ended.");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+}
+
+void loop_through_squares(void (*func)(uint8_t row, uint8_t column)) {
+  for (uint8_t row = 0; row < 8; row++) {
+    for (uint8_t column = 0; column < 8; column++) {
+      func(row, column);
+    }
+  }
 }
