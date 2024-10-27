@@ -2,9 +2,9 @@
 #include <Adafruit_NeoPixel.h>
 
 //pins
-const uint8_t start_button_pin = 2;
-const uint8_t led_strip_pin = 3;
-const uint8_t reed_switch_pins[8][8] = {0};
+extern const uint8_t start_button_pin;
+extern const uint8_t led_strip_pin;
+extern const uint8_t reed_switch_pins[8][8];
 
 //other variables
 volatile Adafruit_NeoPixel led_strip = Adafruit_NeoPixel(64, led_strip_pin, NEO_GRB + NEO_KHZ800);
@@ -27,7 +27,6 @@ volatile int8_t chess_board[8][8] = {//Initialize chess board
 };
 
 void setup() {
-
   Serial.begin(9600);
   Serial.println("Setup has begun.");
 
