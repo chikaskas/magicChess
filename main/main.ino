@@ -44,10 +44,28 @@ void setup() {
   Serial.println("Setup has ended.");
 }
 
-volatile uint32_t excecutions = 0
+volatile uint32_t excecutions = 0;
+volatile uint32_t readings[8][8] = {0};
+//fetch settings
+extern const uint8_t readExcecutions;
+extern const uint8_t min;
+extern const uint8_t max;
+extern const uint8_t maxErrors;
 
 void loop() {
   // put your main code here, to run repeatedly:
+  excecutions++
+
+  if ((executions % readExcecutions) == 0) {
+    //run main code
+  } else {
+    //read data
+    loop_through_squares(
+      [] (uint8_t rows, uint8_t columns) {
+        readings[row][column] += digitalRead(reed_switch_pins[rows][columns])
+      }
+    );//if pin high, add 1
+  }
 }
 
 void loop_through_squares(void (*func)(uint8_t row, uint8_t column)) {
