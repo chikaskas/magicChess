@@ -31,8 +31,8 @@ void setup() {
   Serial.println("Setup has begun.");
 
   //setup led strip
-  led_strip.show();
   led_strip.begin();
+  led_strip.show();
 
   //setup pins
   loop_through_squares(
@@ -44,8 +44,39 @@ void setup() {
   Serial.println("Setup has ended.");
 }
 
+volatile bool prev_readings[8][8] = {
+  {1, 1, 1, 1, 1, 1, 1, 1},
+  {1, 1, 1, 1, 1, 1, 1, 1},
+  {0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0},
+  {1, 1, 1, 1, 1, 1, 1, 1},
+  {1, 1, 1, 1, 1, 1, 1, 1},
+};
+
 void loop() {
-  // put your main code here, to run repeatedly:
+  delay(100);
+
+  volatile bool cur_readings[8][8] = {0};
+
+  for (uint8_t row = 0; row < 8; row++) {
+    for (uint8_t column = 0; column < 8; column++) {
+
+      volatile bool prev_read = digitalRead(reed_switch_pins[row][column]);
+      volatile bool cur_read = digitalRead(reed_switch_pins[row][column]);
+
+      if (prev_read && !cur_read) {
+        //piece lifted
+      }//piece lifted
+
+      if (cur_read && !prev_read) {
+        //piece placed
+      }//piece placed
+
+    }
+  }
+
 }
 
 void loop_through_squares(void (*func)(uint8_t row, uint8_t column)) {
